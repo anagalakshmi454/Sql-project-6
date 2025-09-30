@@ -1,0 +1,13 @@
+1. Subquery in SELECT: Get the employee name and their department's average salary.
+
+SELECT employee_name,(SELECT AVG(salary) FROM employees WHERE department = e.department) AS avg_dept_salary FROM employees e;
+
+
+2. Subquery in WHERE: Find employees with a salary greater than the average salary.
+
+SELECT employee_name, salary FROM employees WHERE salary > (SELECT AVG(salary) FROM employees);
+
+
+3. Subquery in FROM: Get the top 5 highest average salaries by department.
+
+SELECT department, avg_salary FROM (SELECT department, AVG(salary) AS avg_salary FROM employees GROUP BY department) AS dept_avg ORDER BY avg_salary DESC LIMIT 5;
